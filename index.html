@@ -1,18 +1,138 @@
+
+<!-- 
+      BRAINSTORM:
+================================================
+      
+      Build the foundation first. Then focus on placement of elements and design. This is paramount.
+
+      There are no predetermined HTML or CSS elements. The freedom is given to me.
+
+      The only items being generated in the project are the e-mails in your inbox. It appears that the other elements in the inbox page of g-mail does not have to be functional, like the options at the top or the sorting categories on the left-hand side (inbox, starred, spam, trash, etc.).
+
+      Initial Observations:
+      1. There are arrays filled with content. We will implement the content of each e-mail by accessing the arrays body, subject, and sender. Content will most likely be selected randomly.
+
+      2. The function generateMessage() considers all three content arrays body, subject, and sender. generateMessage() returns message.
+
+      3. All of the generated messages by the script are pushed into the array geemails.
+
+      4. Because the messages created by js/mail-generator.js are stored in the window, I can access them in the <script></script> tag in my HTML.
+
+      5. querySelectorAll() is probably the way to go because any new messages we generate need to be considered. Executing actions to each message by className allows us to automate things.
+
+
+
+
+      TO-DO LIST:
+      1. Create another <li> element with the DOM for currentGeemail.sender.
+
+      2. Try using the CSS Grid Layout to have sender/subject elements adjacent to each other.
+
+      3. Finally,  organize all of the HTML elements and ramp up the aesthetics of the webpage with CSS styling.
+
+
+
+      Project Goals:
+
+      1. Only the subject of messages will be displayed initially.  Content of each message will be displayed when each element is clicked. If possible, limit the amount of messages that can be clicked on at once.
+
+================================================
+ -->
+
+
 <html>
 	<head>
 		<script src="js/mail-generator.js"></script>
-		<link href="css/style.css" rel="stylesheet" media="screen">
+            <link href="css/style.css" rel="stylesheet" media="screen">
+            <title>gee-mail</title>
+            
+<!-- 
+================================================
+      JavaScript
+================================================
+ -->
+
     <script>
-      window.onload = function(){
+      window.onload = function() {
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
         
+      // Awesome visual console method for logging arrays or comparing serveral arrays.
+      console.table( window.geemails );
+
+      // windows.geemail is an object that contains:        date, subject, sender, and body.
+      console.log( window.geemails[0] );
+
+       for( var i = 0; i < window.geemails.length; i++ ) {
+             var getInbox = document.getElementById( 'messagesReceived' );
+             // We'll use a <li> element to store the content of every e-mail.
+            var currentGeemail = window.geemails[i];
+
+            var listSender = document.createElement( 'li' );
+            listSender.className = 'message';
+
+            var listSubject = document.createElement( 'li' );
+            // We want to log the subject of the message within the first list element.
+            listSubject.className = 'message';
+            // adding the <br> elements within the string are just temporary. remove these and use CSS padding and margins when you can.
+            listSubject.innerHTML = `<br> ${ currentGeemail.subject } <br>`;
+            getInbox.appendChild( listSubject );
+
+            var listContent = document.createElement( 'li' );
+            listContent.className = 'content';
+            listContent.innerHTML = ` ${ currentGeemail.body }`;
+            listSubject.appendChild( listContent );
+
+       }
+
+       // Wanted to make a function that would loop through the stub data object, but maybe it isn't necessary. I think it can all be done within the first for loop.
+       function fillContent( object ) {
+             var getContentElem = document.getElementByClassName( 'content' );
+             for ( var i in object ) {
+                   
+
+             }
+
+       }
+
+       // I notice that g-mail has the amount of unread messages in their HTML title tag. I'll do the same but with total messages in the inbox.
+       function updateTitle( elementID ) {
+             // We can use a DOM method called .childElementCount() do get the number of child elements  within an element.
+             var getElement = document.getElementById( elementID );
+       }
+
+
+      // If we don't want content to show unless clicked, then there needs to be list elements (the message content) within list elements (the message subject).
+      var ulContent = document.createElement('ul');
+      ulContent.className = 'contentList';
+
+      var listContent = document.createElement('li');
+      listContent.className = 'content';
+      listContent.innerHTML = 'Crucifix meggings literally, williamsburg franzen distillery meh quinoa.';
+      ulContent.appendChild(listContent);
+
+      newList.appendChild(ulContent);
+
       };
     </script>
+
+<!-- 
+================================================
+      JavaScript
+================================================
+ -->
+
 	</head>
 	<body>
 		<div class="container" id="main">
-			Build Me!
+			<div class="wrapper" id="wrapInbox">
+                        <div class="wrapper" id="wrapperGrid">
+                              <!-- Message sender and subject will be stored here with content stored within subject. -->
+                        </div>
+                        <ul id="messagesReceived">
+
+                        </ul>
+                  </div>
 		</div>
 	</body>
 </html>

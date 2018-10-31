@@ -1,0 +1,26 @@
+
+/* used for custom css properties (global variables) */
+:root { 
+
+
+}
+
+/* CSS RESET, this makes elements under and html reach the edge of the browser window. */
+html, body {
+      margin: 0;
+      padding: 0;
+
+}
+
+
+
+#wrapperGrid {
+      display: grid;
+      grid-template-columns: 30% 70%;
+
+}
+
+#wrapInbox ul {
+      list-style-type: none;
+
+}
