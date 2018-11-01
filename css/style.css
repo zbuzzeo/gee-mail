@@ -2,7 +2,7 @@
 /* used for custom css properties (global variables) */
 :root { 
       --paddingContent: 28em;
-      --paddingDate: 20em;
+      --paddingDate: 17em;
 
 }
 
@@ -47,6 +47,7 @@ html, body {
 .displayMessagePrev {
       display: grid;
       grid-template-columns: 9em 15em var(--paddingContent) var(--paddingDate);
+      grid-column-gap: 1em;
       padding: 0.95em;
       max-height: 1em;
 
@@ -58,8 +59,13 @@ html, body {
 
 }
 
+.sender, .subject {
+      width: fit-content;
+
+}
 
 .sender, .subject, .content, .date {
+
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -80,11 +86,11 @@ html, body {
 }
 
 .content {
-      padding-left: 1.5em;
+      /* padding-left: 1.5em; */
 
 }
 
 .date {
-      padding-left: 13.774814em;
+      padding-left: 10.774814em;
 
 }
