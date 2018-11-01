@@ -1,12 +1,15 @@
 
 /* used for custom css properties (global variables) */
 :root { 
-
+      --paddingContent: 28em;
+      --paddingDate: 20em;
 
 }
 
 /* CSS RESET, this makes elements under and html reach the edge of the browser window. */
 html, body {
+      font-family: 'Segoe UI Historic';
+      font-size: 62.5%;
       margin: 0;
       padding: 0;
 
@@ -14,13 +17,74 @@ html, body {
 
 
 
-#wrapperGrid {
+/* #wrapperGrid {
       display: grid;
       grid-template-columns: 30% 70%;
 
+} */
+
+#wrapInbox {
+      position: relative;
+      background-color: #f3f3f3;
+      margin-top: 24.7em;
+      margin-left: 35em;
+      margin-right: auto;
+      width: 200em;
+      height: fit-content;
+
+      display: grid;
+      grid-row-gap: 0.75em;
+      padding: 1em;
+
 }
 
-#wrapInbox ul {
-      list-style-type: none;
+.messageWrapper {
+      font-size: 2.7em;
+      border: 1px solid #dddddd;
+
+}
+
+.displayMessagePrev {
+      display: grid;
+      grid-template-columns: 9em 15em var(--paddingContent) var(--paddingDate);
+      padding: 0.95em;
+      max-height: 1em;
+
+}
+
+.displayFullMessage {
+      display: none;
+      padding: 0em 0.95em 0.95em 0.95em;
+
+}
+
+
+.sender, .subject, .content, .date {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      transition-duration: 300ms;
+
+}
+
+.sender:hover, .subject:hover, .content:hover, .date:hover {
+      color: orange;
+
+}
+
+.sender, .subject, .date {
+      float: left;
+      font-weight: bold;
+
+}
+
+.content {
+      padding-left: 1.5em;
+
+}
+
+.date {
+      padding-left: 13.774814em;
 
 }

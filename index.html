@@ -24,11 +24,13 @@
 
 
       TO-DO LIST:
-      1. Create another <li> element with the DOM for currentGeemail.sender.
+      1. Create another <li> element with the DOM for currentGeemail.sender. ✅                                                 
 
-      2. Try using the CSS Grid Layout to have sender/subject elements adjacent to each other.
+      2. Try using the CSS Grid Layout to have sender/subject elements adjacent to each other. ✅                       
 
-      3. addEventListener method to the classes 'content' and 'sender' to display the content of each message when either the message subject or sender is clicked on.
+      3. Find a way to modify the size of each grid row (grid-template-rows possibly?) to decrease the gap between each inbox message.          FOUND AN ALTERNATIVE    ✅
+      
+      3. addEventListener to the 'displayFullMessage' preview to expand the message fully. ✅             
             -     This should be displayed onClick:
                         Date
                         Sender
@@ -36,7 +38,18 @@
 
                         Woke taxidermy narwhal craft beer wayfarers copper mug pop-up offal 8-bit echo park. Brunch tousled jianbing, wolf kale chips raclette echo park unicorn four loko hammock +1 pabst selfies. Glossier kale chips kinfolk cold-pressed fashion axe selvage copper mug narwhal kogi selfies try-hard food truck banh mi post-ironic portland. Lo-fi truffaut waistcoat viral woke, put a bird on it vegan. Raw denim pork belly truffaut, drinking vinegar health goth wolf synth swag. Literally waistcoat ramps fingerstache, kogi direct trade trust fund small batch. Subway tile pok pok banh mi normcore thundercats.
 
-      4. Finally,  organize all of the HTML elements and ramp up the aesthetics of the webpage with CSS styling. 
+      4. Create side menu with a similar grid layout. Make the side bar fixed on the screen as you scroll down. ❌
+            Side menu components:
+            -     Inbox
+            -     Promotions
+            -     Starred
+            -     Drafts
+            -     Spam
+            -     Trash
+      
+      5. Create a non-functional search bar component above the inbox to filter through messages. ❌
+      
+      6. Organize elements and focus on aesthetics. ❌                                                       
 
 
 
@@ -52,7 +65,7 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
             <link href="css/style.css" rel="stylesheet" media="screen">
-            <title>gee-mail</title>
+            <title id="titleTag">(0) Unread Messages</title>
             
 <!-- 
 ================================================
@@ -65,63 +78,93 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
         
-      // Awesome visual console method for logging arrays or comparing serveral arrays.
-      console.table( window.geemails );
+            // Awesome visual console method for logging arrays or comparing several arrays.
+            console.table( window.geemails );
 
-      // windows.geemail is an object that contains:        date, subject, sender, and body.
-      console.log( window.geemails[0] );
-
-       for( var i = 0; i < window.geemails.length; i++ ) {
-             var getInbox = document.getElementById( 'messagesReceived' );
-             // We'll use a <li> element to store the content of every e-mail.
-            var currentGeemail = window.geemails[i];
-
-            var listSender = document.createElement( 'li' );
-            listSender.className = 'message';
-
-            var listSubject = document.createElement( 'li' );
-            // We want to log the subject of the message within the first list element.
-            listSubject.className = 'message';
-            // adding the <br> elements within the string are just temporary. remove these and use CSS padding and margins when you can.
-            listSubject.innerHTML = `<br> ${ currentGeemail.subject } <br>`;
-            getInbox.appendChild( listSubject );
-
-            var listContent = document.createElement( 'li' );
-            listContent.className = 'content';
-            listContent.innerHTML = ` ${ currentGeemail.body }`;
-            listSubject.appendChild( listContent );
-
-       }
-
-       // Wanted to make a function that would loop through the stub data object, but maybe it isn't necessary. I think it can all be done within the first for loop.
-       function fillContent( object ) {
-             var getContentElem = document.getElementByClassName( 'content' );
-             for ( var i in object ) {
-                   
-
-             }
-
-       }
-
-       // I notice that g-mail has the amount of unread messages in their HTML title tag. I'll do the same but with total messages in the inbox.
-       function updateTitle( elementID ) {
-             // We can use a DOM method called .childElementCount() do get the number of child elements  within an element.
-             var getElement = document.getElementById( elementID );
-       }
+            // windows.geemail is an object that contains:        date, subject, sender, and body.
+            console.log( window.geemails[0] );
 
 
-      // If we don't want content to show unless clicked, then there needs to be list elements (the message content) within list elements (the message subject).
-      var ulContent = document.createElement('ul');
-      ulContent.className = 'contentList';
 
-      var listContent = document.createElement('li');
-      listContent.className = 'content';
-      listContent.innerHTML = 'Crucifix meggings literally, williamsburg franzen distillery meh quinoa.';
-      ulContent.appendChild(listContent);
 
-      newList.appendChild(ulContent);
+            //          FUNCTION FOR ASSIGNING THE COMPONENTS OF EACH E-MAIL IN  js/mail-generator.js/      ( DRY Principle )
+            function createElement ( parentElement, typeElement, classElement, content ) {
+                  var newElement = document.createElement( typeElement );
+                  newElement.className = classElement;
+                  newElement.innerHTML = content;
+                  parentElement.appendChild( newElement );
 
-      };
+            }
+
+
+
+            //          MANIPULATION OF STUB DATA IN js/mail-generator.js/
+            for ( var i = 0; i < window.geemails.length; i ++ ) {
+                  var getInboxWrapper = document.getElementById( 'wrapInbox' );
+                  var createDisplayWrapper = document.createElement( 'div' );
+                  var createDisplayElement = document.createElement( 'div' );
+                  var createFullMessage = document.createElement( 'div' );
+                  var currentGeemail = window.geemails[i];
+
+                  createDisplayWrapper.className = 'messageWrapper';
+                  getInboxWrapper.appendChild( createDisplayWrapper );
+
+                  createDisplayElement.className = 'displayMessagePrev';
+                  createDisplayWrapper.appendChild( createDisplayElement );
+
+                  console.log( '%c CURRENT GMAIL:', 'color: orange; font-weight: bold; font-size: 1.3em;' )
+                  console.log( currentGeemail );
+                  
+                  createElement( createDisplayElement, 'div', 'sender', currentGeemail.sender );
+                  createElement( createDisplayElement, 'div', 'subject', currentGeemail.subject );
+                  createElement( createDisplayElement, 'div', 'content', currentGeemail.body );
+
+                  createElement( createDisplayElement, 'div', 'date', currentGeemail.date );
+                  createElement( 
+                        createDisplayWrapper, 
+                        'div', 
+                        'displayFullMessage', 
+                        `${ currentGeemail.sender }<br>
+                        ${ currentGeemail.subject }<br>
+                        ${ currentGeemail.date }<br><br>
+                        ${ currentGeemail.body }`
+                  );
+
+                  var getFullMessage = document.getElementsByClassName( 'displayFullMessage' );
+                  createDisplayWrapper.addEventListener( 'click', toggleMessage );
+
+            }
+
+            function toggleMessage() {
+                  var current = this.querySelectorAll( '.displayFullMessage' )[0];
+                  var currentDisplay = current.style.display;
+                  // console.log( current, current, current, current, current );
+                  if ( current.style.display !== 'block' ) {
+                        current.style.display = 'block';
+                  } else if ( current.style.display === 'block' ) {
+                        current.style.display = 'none';
+                  }
+
+            }
+
+
+
+            //          UPDATING THE TITLE TAG:
+            var getTitle = document.getElementById( 'titleTag' );
+
+            function updateTitle( element ) {
+                  element.innerHTML = `(${ window.geemails.length }) Unread Messages`;
+                  
+                  console.log( '%c Document title was changed!', 'color: orange; font-weight: bold; font-size: 1.3em;' )
+                  console.log( `Element #${ element.id } changed to: ${ element.innerHTML }.` );
+
+            }
+
+            updateTitle( getTitle );
+            console.log( `Amount of unread messages: ${ window.geemails.length }.` );
+            
+      }
+
     </script>
 
 <!-- 
@@ -134,12 +177,9 @@
 	<body>
 		<div class="container" id="main">
 			<div class="wrapper" id="wrapInbox">
-                        <div class="wrapper" id="wrapperGrid">
-                              <!-- Message sender and subject will be stored here with content stored within subject. -->
-                        </div>
-                        <ul id="messagesReceived">
-
-                        </ul>
+                        <!-- <div class="wrapper" id="wrapSender"></div>
+                        <div class="wrapper" id="wrapSubject"></div>
+                        <div class="wrapper" id="wrapDate"></div> -->
                   </div>
 		</div>
 	</body>
