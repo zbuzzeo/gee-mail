@@ -4,6 +4,8 @@
       --paddingContent: 28em;
       --paddingDate: 17em;
 
+      --animation-flicker-duration: 3000ms;
+
 }
 
 /* CSS RESET, this makes elements under and html reach the edge of the browser window. */
@@ -26,8 +28,8 @@ html, body {
 #wrapInbox {
       position: relative;
       background-color: #f3f3f3;
-      margin-top: 24.7em;
-      margin-left: 35em;
+      /* margin-top: 24.7em;
+      margin-left: 35em; */
       margin-right: auto;
       width: 200em;
       height: fit-content;
@@ -74,8 +76,8 @@ html, body {
 
 }
 
-.sender:hover, .subject:hover, .content:hover, .date:hover {
-      color: orange;
+.sender:hover, .subject:hover, .content:hover, .date:hover, .navElem:hover {
+      color: cornflowerblue;
 
 }
 
@@ -85,12 +87,149 @@ html, body {
 
 }
 
-.content {
-      /* padding-left: 1.5em; */
+.date {
+      padding-left: 10.52592556423em;
 
 }
 
-.date {
-      padding-left: 10.52592556423em;
+
+
+/* DECORATIVE ELEMENTS */
+#main {
+      display: grid;
+      grid-template-columns: 35em 70em;
+      grid-column-gap: 1em;
+      margin-top: 0em;
+
+
+}
+
+#wrapNav {
+      background-color: #f3f3f3;
+      width: 35em;
+      height: 90.2em;
+
+}
+
+#navSection {
+      /* border: 1px solid #ddd; */
+      width: 35em;
+      height: 88.9em;
+
+      display: grid;
+      grid-template-rows: repeat(6, 5em);
+
+
+}
+
+.navElem {
+      font-size: 3em;
+      padding-top: 1em;
+      padding-right: 1em;
+      padding-left: 7em;
+
+      transition-duration: 300ms;
+
+}
+
+#navInbox {
+      font-weight: bold;
+
+}
+
+
+
+#topbar {
+      background-color: cornflowerblue;
+      width: 100vw;
+      height: 8em;
+
+      display: flex;
+
+}
+
+.topbarText {
+      color: white;
+      font-family: 'Century Gothic';
+      font-size: 4.8em;
+      font-weight: bold;
+      padding-top: 0.15em;
+      padding-left: 1em;
+
+}
+
+.animate-flicker {
+      font-size: 0.7em;
+      padding-left: 0.6em;
+
+}
+
+@keyframes flickerAnimation {
+      0%   { opacity:1; }
+      50%  { opacity:0; }
+      100% { opacity:1; }
+
+}
+
+@-o-keyframes flickerAnimation{
+      0%   { opacity:1; }
+      50%  { opacity:0; }
+      100% { opacity:1; }
+
+}
+
+@-moz-keyframes flickerAnimation{
+      0%   { opacity:1; }
+      50%  { opacity:0; }
+      100% { opacity:1; }
+
+}
+
+@-webkit-keyframes flickerAnimation{
+      0%   { opacity:1; }
+      50%  { opacity:0; }
+      100% { opacity:1; }
+
+}
+
+.animate-flicker {
+       -webkit-animation: flickerAnimation var(--animation-flicker-duration) infinite;
+       -moz-animation: flickerAnimation var(--animation-flicker-duration) infinite;
+       -o-animation: flickerAnimation var(--animation-flicker-duration) infinite;
+        animation: flickerAnimation var(--animation-flicker-duration) infinite;
+
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: ellipsis;
+
+}
+
+#searchBar {
+      background-color: white;
+      border: 1px solid #aaa;
+      width: 80em;
+      height: 4em;
+      position: relative;
+      margin-left: 60em;
+      margin-top: 2em;
+      display: flex;
+
+}
+
+#searchBarIcon {
+      width: 2.4em;
+      height: 2.4em;
+      padding-left: 0.8em;
+      padding-top: 0.8em;
+
+}
+
+.searchInput {
+      background-color: white;
+      border: none;
+      font-family: 'Century Gothic';
+      width: 95%;
+      height: 100%;
+
 
 }

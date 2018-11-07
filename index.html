@@ -11,6 +11,7 @@
 
       Initial Observations:
       1. There are arrays filled with content. We will implement the content of each e-mail by accessing the arrays body, subject, and sender. Content will most likely be selected randomly.
+            correction: we don't need to access the information in the arrays, all of that information becomes an object in the end. we have to interact with window.geemails instead.
 
       2. The function generateMessage() considers all three content arrays body, subject, and sender. generateMessage() returns message.
 
@@ -74,6 +75,7 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
             <link href="css/style.css" rel="stylesheet" media="screen">
+            <link rel="shortcut icon" type="image/png" href="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS-ns-d7AEVUbOwCKXNDPWhyjOLETVxgLywF3ulYbTk3ypRfCcLDIy2Hw"/>
             <title id="titleTag">(0) Unread Messages</title>
             
 <!-- 
@@ -108,7 +110,7 @@
 
 
             //          MANIPULATION OF STUB DATA IN js/mail-generator.js/
-            for ( var i = 0; i < window.geemails.length; i ++ ) {
+            for ( var i = 0; i < window.geemails.length; i++ ) {
                   var getInboxWrapper = document.getElementById( 'wrapInbox' );
                   var createDisplayWrapper = document.createElement( 'div' );
                   var createDisplayElement = document.createElement( 'div' );
@@ -127,7 +129,6 @@
                   createElement( createDisplayElement, 'div', 'sender', currentGeemail.sender );
                   createElement( createDisplayElement, 'div', 'subject', currentGeemail.subject );
                   createElement( createDisplayElement, 'div', 'content', currentGeemail.body );
-
                   createElement( createDisplayElement, 'div', 'date', currentGeemail.date );
                   createElement( 
                         createDisplayWrapper, 
@@ -146,10 +147,14 @@
 
             function toggleMessage() {
                   var current = this.querySelectorAll( '.displayFullMessage' )[0];
+                  var selectAllWrappers = document.getElementById('wrapInbox').querySelectorAll('messageWrapper')[0];
                   var currentDisplay = current.style.display;
-                  // console.log( current, current, current, current, current );
+                  console.log('%c LOGGING VALUE OF THIS', 'color: red; font-weight: bold;');
+                  console.log( current, current, current, current, current );
+                  console.log( selectAllWrappers, selectAllWrappers );
                   if ( current.style.display !== 'block' ) {
                         current.style.display = 'block';
+                        
                   } else if ( current.style.display === 'block' ) {
                         current.style.display = 'none';
                   }
@@ -184,7 +189,26 @@
 
 	</head>
 	<body>
+            <div id="topbar">
+                  <div class="topbarText">Gee-mail: <span class="animate-flicker">Reimagining your inbox.</span></div>
+                  <div id="searchBar">
+                              <input type="text" name="fname" placeholder="  Search . . ." class="searchInput"><br>
+                              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/2000px-Magnifying_glass_icon.svg.png" alt="magnifying_glass.png" srcset="" id="searchBarIcon">
+                  </div>
+            </div>
 		<div class="container" id="main">
+                  <div class="wrapper">
+                        <div class="wrapper" id="wrapNav">
+                              <div class="wrapper" id="navSection">
+                                          <div class="navElem" id="navInbox">Inbox</div>
+                                          <div class="navElem" id="navStarred">Starred</div>
+                                          <div class="navElem" id="navSent">Sent</div>
+                                          <div class="navElem" id="navDraft">Draft</div>
+                                          <div class="navElem" id="navSpam">Spam</div>
+                                          <div class="navElem" id="navTrash">Trash</div>
+                                    </div>
+                        </div>
+                  </div>
 			<div class="wrapper" id="wrapInbox">
                         <!-- <div class="wrapper" id="wrapSender"></div>
                         <div class="wrapper" id="wrapSubject"></div>
