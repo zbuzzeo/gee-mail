@@ -92,6 +92,15 @@ html, body {
 
 }
 
+.msgCount {
+      font-family: 'Century Gothic';
+      font-size: 2.4em;
+      font-weight: bold;
+      text-align: center;
+      padding-top: 1em;
+
+}
+
 
 
 /* DECORATIVE ELEMENTS */
