@@ -110,12 +110,16 @@
 
             
             //          MANIPULATION OF STUB DATA IN js/mail-generator.js/
-            function loopMe( contentObject ) {
+            function createEmail( contentObject ) {
+
+                  console.log( '%c CONTENTOBJECT:', 'color: cornflowerblue; font-weight: bold; font-size: 1.3em;' );
+                  console.log( contentObject.sender );
+
                   var getInboxWrapper = document.getElementById( 'wrapInbox' );
                   var createDisplayWrapper = document.createElement( 'div' );
                   var createDisplayElement = document.createElement( 'div' );
                   var createFullMessage = document.createElement( 'div' );
-                  var contentObject = window.geemails[i];
+                  // var contentObject = window.geemails[i];
 
                   createDisplayWrapper.className = 'messageWrapper';
                   getInboxWrapper.appendChild( createDisplayWrapper );
@@ -134,7 +138,7 @@
                         createDisplayWrapper, 
                         'div', 
                         'displayFullMessage', 
-                        `${ contentObject.sender }<br>s
+                        `${ contentObject.sender }<br>
                         ${ contentObject.subject }<br>
                         ${ contentObject.date }<br><br>
                         ${ contentObject.body }`
@@ -146,14 +150,13 @@
             }
 
 
-
+            // first 10 messages
             for ( var i = 0; i < window.geemails.length; i++ ) {
-                  loopMe( window.geemails[i] );
+                  createEmail( window.geemails[i] );
                   
             }
 
             function toggleMessage() {
-                  console.log('ajsadsjlsdljsdakjjksdakakjlkksdaksakjdlklsadklKLASDKLJSDKLASDKLJ');
                   var current = this.querySelectorAll( '.displayFullMessage' )[0];
                   // console.log( current, current, current, current, current );
                   if ( current.style.display !== 'block' ) {
@@ -178,43 +181,22 @@
                   console.log( `Element #${ element.id } changed to: ${ element.innerHTML }.` );
 
             }
+            
+            // update upon immediately loading the page to replace the placeholder text.
+            updateMsgCount( getTitle );
+            updateMsgCount( getMsgCount );
 
             function newEmails() {
                   var newMessage = getNewMessage();
+                  
+                  // necessary for updating the message counters. the message counters take the length of the array window.geemails.
+                  window.geemails.push( newMessage );
 
                   updateMsgCount( getTitle );
                   updateMsgCount( getMsgCount );
-                  loopMe( newMessage );   // ERROR IS HERE
-
-                  // var getInboxWrapper = document.getElementById( 'wrapInbox' );
-                  // var createDisplayWrapper = document.createElement( 'div' );
-                  // var createDisplayElement = document.createElement( 'div' );
-
-                  // createDisplayWrapper.className = 'messageWrapper';
-                  // getInboxWrapper.appendChild( createDisplayWrapper );
-
-                  // createDisplayElement.className = 'displayMessagePrev';
-                  // createDisplayWrapper.appendChild( createDisplayElement );
-                  
-                  // window.geemails.push( getNewMessage() );
-                  // console.table( window.geemails );
-
-                  // createElement( createDisplayElement, 'div', 'sender', newMessage.sender );
-                  // createElement( createDisplayElement, 'div', 'subject', newMessage.subject );
-                  // createElement( createDisplayElement, 'div', 'content', newMessage.body );
-                  // createElement( createDisplayElement, 'div', 'date', newMessage.date );
-                  // createElement( 
-                  //       createDisplayWrapper, 
-                  //       'div', 
-                  //       'displayFullMessage', 
-                  //       `${ newMessage.sender }<br>
-                  //       ${ newMessage.subject }<br>
-                  //       ${ newMessage.date }<br><br>
-                  //       ${ newMessage.body }`
-                  // );
-
-                  // var getFullMessage = document.getElementsByClassName( 'displayFullMessage' );
-                  // createDisplayWrapper.addEventListener( 'click', toggleMessage );
+                  console.log( '%c newMessage:', 'color: cornflowerblue; font-weight: bold; font-size: 1.3em;' );
+                  console.log( newMessage );
+                  createEmail( newMessage );
 
             }
 
