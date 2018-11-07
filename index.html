@@ -178,51 +178,51 @@
                   console.log( `Element #${ element.id } changed to: ${ element.innerHTML }.` );
 
             }
-            
 
-            // querySelectorAll allows you to indicate a starting point. Maybe use this to set the starting point after the first 10 messages?
-            setInterval( function() {
+            function newEmails() {
+                  var newMessage = getNewMessage();
+
                   updateMsgCount( getTitle );
                   updateMsgCount( getMsgCount );
+                  loopMe( newMessage );   // ERROR IS HERE
 
-                  var newMessage = getNewMessage();
-                  // loopMe( newMessage );       // breaks when sender || subject || content || date is assigned as a className in createElement... but it works when I just copy paste the code.
+                  // var getInboxWrapper = document.getElementById( 'wrapInbox' );
+                  // var createDisplayWrapper = document.createElement( 'div' );
+                  // var createDisplayElement = document.createElement( 'div' );
+
+                  // createDisplayWrapper.className = 'messageWrapper';
+                  // getInboxWrapper.appendChild( createDisplayWrapper );
+
+                  // createDisplayElement.className = 'displayMessagePrev';
+                  // createDisplayWrapper.appendChild( createDisplayElement );
                   
-                  var getInboxWrapper = document.getElementById( 'wrapInbox' );
-                  var createDisplayWrapper = document.createElement( 'div' );
-                  var createDisplayElement = document.createElement( 'div' );
+                  // window.geemails.push( getNewMessage() );
+                  // console.table( window.geemails );
 
-                  createDisplayWrapper.className = 'messageWrapper';
-                  getInboxWrapper.appendChild( createDisplayWrapper );
+                  // createElement( createDisplayElement, 'div', 'sender', newMessage.sender );
+                  // createElement( createDisplayElement, 'div', 'subject', newMessage.subject );
+                  // createElement( createDisplayElement, 'div', 'content', newMessage.body );
+                  // createElement( createDisplayElement, 'div', 'date', newMessage.date );
+                  // createElement( 
+                  //       createDisplayWrapper, 
+                  //       'div', 
+                  //       'displayFullMessage', 
+                  //       `${ newMessage.sender }<br>
+                  //       ${ newMessage.subject }<br>
+                  //       ${ newMessage.date }<br><br>
+                  //       ${ newMessage.body }`
+                  // );
 
-                  createDisplayElement.className = 'displayMessagePrev';
-                  createDisplayWrapper.appendChild( createDisplayElement );
-                  
-                  window.geemails.push( getNewMessage() );
-                  console.table( window.geemails );
+                  // var getFullMessage = document.getElementsByClassName( 'displayFullMessage' );
+                  // createDisplayWrapper.addEventListener( 'click', toggleMessage );
 
-                  createElement( createDisplayElement, 'div', 'sender', newMessage.sender );
-                  createElement( createDisplayElement, 'div', 'subject', newMessage.subject );
-                  createElement( createDisplayElement, 'div', 'content', newMessage.body );
-                  createElement( createDisplayElement, 'div', 'date', newMessage.date );
-                  createElement( 
-                        createDisplayWrapper, 
-                        'div', 
-                        'displayFullMessage', 
-                        `${ newMessage.sender }<br>
-                        ${ newMessage.subject }<br>
-                        ${ newMessage.date }<br><br>
-                        ${ newMessage.body }`
-                  );
+            }
 
-                  var getFullMessage = document.getElementsByClassName( 'displayFullMessage' );
-                  createDisplayWrapper.addEventListener( 'click', toggleMessage );
-                  
-            }, 
-            2 * 1000,   // 2 seconds
-            );
+            setInterval(newEmails, 2 * 1000);
 
-      }
+
+
+            }
 
     </script>
 
